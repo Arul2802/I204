@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Commit Changes{% endblock %}
+{%load static%}
+{% block content %}
+<div class="container">
+    <h2>Commit Changes to Repository</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Commit Changes</button>
+    </form>
+    <a href="{% url 'repo_detail' repo_id=repository.id %}" class="btn btn-back">Back to Repository</a>
+</div>
+{% endblock %}

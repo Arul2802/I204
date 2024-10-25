@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Repositories{% endblock %}
+{%load static%}
+{% block content %}
+<div class="container">
+    <h2>Repositories</h2>
+    <ul class="list">
+        {% for repo in repositories %}
+            <li>
+                <a href="{% url 'repo_detail' repo_id=repo.id %}">{{ repo.name }}</a>
+                <a href="{% url 'add_repo' %}" class="btn">Add New Repository</a>
+                - {{ repo.description }}
+            </li>
+        {% empty %}
+            <li>No repositories found.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

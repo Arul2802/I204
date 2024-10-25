@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{%load static%}
+{% block title %}Add File{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add File to Repository</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Add File</button>
+    </form>
+    <a href="{% url 'repo_detail' repo_id=repository.id %}" class="btn btn-back">Back to Repository</a>
+</div>
+{% endblock %}

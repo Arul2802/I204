@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Repository Details{% endblock %}
+{%load static%}
+{% block content %}
+<div class="container">
+    <h2>{{ repository.name }}</h2>
+    <p>{{ repository.description }}</p>
+
+    <h3>Files</h3>
+    <ul class="list">
+        {% for file in repository.file_set.all %}
+            <li>{{ file.name }} - Last Modified: {{ file.last_modified }}</li>
+        {% empty %}
+            <li>No files in this repository.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Commits</h3>
+    <ul class="list">
+        {% for commit in repository.commit_set.all %}
+            <li>
+                <strong>{{ commit.timestamp }}:</strong> {{ commit.message }}
+                <ul>
+                    {% for file in commit.files.all %}
+                        <li>{{ file.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+            <li>No commits yet.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'add_file' repo_id=repository.id %}" class="btn">Add File</a>
+    <a href="{% url 'commit_changes' repo_id=repository.id %}" class="btn">Commit Changes</a>
+</div>
+{% endblock %}

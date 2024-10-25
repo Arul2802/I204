@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Add Repository{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add a New Repository</h2>
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Create Repository</button>
+    </form>
+    <a href="{% url 'repo_list' %}" class="btn btn-back">Back to Repositories</a>
+</div>
+{% endblock %}
+
